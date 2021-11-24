@@ -9,7 +9,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class Life : MonoBehaviour
 {
     public GameObject NewPlayer;
-    public Light2D SUN1;
+    public Light2D SUN;
     public Light2D FIRE;
     public TextMeshProUGUI healthtext;
     public GameObject deathText;
@@ -48,7 +48,7 @@ public class Life : MonoBehaviour
         if (time > 0 && HP > 0){  //Timer updater
             time -= Time.deltaTime;
             Settimetext();
-            SUN1.intensity = time*0.02f;
+            SUN.intensity = time*0.02f;
         }
         else{ //Displays youlosttext if HP or time runs out
             youlost();
