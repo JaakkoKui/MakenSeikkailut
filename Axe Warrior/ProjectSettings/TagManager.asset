@@ -8,6 +8,8 @@ TagManager:
   - Fire
   - Matches
   - BambuSpikes
+  - TutorialRequirement
+  - LianaLadder
   layers:
   - Default
   - TransparentFX
