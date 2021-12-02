@@ -23524,7 +23524,7 @@ PrefabInstance:
     - target: {fileID: 5337421135197040007, guid: 4959d1e1b03c237438f81b6f7e281f4c,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5337421135369771860, guid: 4959d1e1b03c237438f81b6f7e281f4c,
         type: 3}
@@ -24327,6 +24327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1497536538}
+  PC: {fileID: 0}
 --- !u!1001 &1506629591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32849,6 +32850,11 @@ PrefabInstance:
       propertyPath: SUN
       value: 
       objectReference: {fileID: 798865208}
+    - target: {fileID: 4151355102440590513, guid: ea2867d233fd16f47ba9379d6ae246de,
+        type: 3}
+      propertyPath: FIRE
+      value: 
+      objectReference: {fileID: 1448880501}
     - target: {fileID: 4151355102440590513, guid: ea2867d233fd16f47ba9379d6ae246de,
         type: 3}
       propertyPath: make1
