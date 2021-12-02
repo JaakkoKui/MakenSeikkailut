@@ -10,8 +10,13 @@ public class laddermovement : MonoBehaviour
     private bool isLadder;
     private bool isClimbing;
     [SerializeField] private Rigidbody2D rb;
-
+    public Platformer.Mechanics.PlayerController PC;
     // Start is called  before the first frame update
+    
+    void Start()
+    {
+        PC = GetComponent<Platformer.Mechanics.PlayerController>();
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("LianaLadder"))
@@ -44,11 +49,13 @@ public class laddermovement : MonoBehaviour
         if(isClimbing)
         {
             rb.gravityScale = 0f;
-            rb.velocity = new Vector2(rb.velocity.x, vertical * speed);
+            PC.velocity = new Vector2(rb.velocity.x, vertical * speed);
+           // rb.velocity = new Vector2(rb.velocity.x, vertical * speed);
         }
-        else
+       /* else
         {
+            rb.velocity = new Vector2(0,0);
             rb.gravityScale = 1f;
-        }
+        } */
     }
 }

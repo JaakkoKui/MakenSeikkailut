@@ -25,12 +25,13 @@ public class Life : MonoBehaviour
     public float period = 0.1f;
     Platformer.Mechanics.PlayerController PC;
     public SpriteRenderer spriteRenderer;
-    public Sprite deadMake;
     AudioSource audioSource;
     private bool dscream = false;
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        anim = GetComponent<Animator>();
         MainMenu = true;
         deathText.SetActive(false);
         Sethealthtext();
@@ -41,9 +42,15 @@ public class Life : MonoBehaviour
     }
     void Update()
     {   
+        if(PC.velocity.x != 0){
+            anim.SetBool("isWalking", true);
+        }
+        else{
+            anim.SetBool("isWalking", false);
+        }
         if (Time.time > nextActionTime ) {
             nextActionTime += period;
-//            FIRE.intensity = UnityEngine.Random.Range(0.6f,1f);
+            FIRE.intensity = UnityEngine.Random.Range(0.4f,1f);
         }
         if (time > 0 && HP > 0){  //Timer updater
             time -= Time.deltaTime;
@@ -77,7 +84,7 @@ public class Life : MonoBehaviour
         deathText.SetActive(true);
         PC.maxSpeed = 0;
         PC.jumpTakeOffSpeed = 0;
-        spriteRenderer.sprite = deadMake;
+        anim.SetBool("isDead", true);
         if (!dscream){
         audioSource.Play();
         Debug.Log("Wilhelm");
@@ -100,11 +107,13 @@ public class Life : MonoBehaviour
             Matches += 1;
             other.gameObject.SetActive(false);
             Setmatchestext();
+            time += 10;
         }
         if (other.gameObject.CompareTag("BambuSpikes")){
             HP -= 1;
             Sethealthtext();
         }
+        
     }
     public void OnTriggerStay2D(Collider2D other){   //Checks if trigger collision stays
             if (other.gameObject.CompareTag("Fire")){

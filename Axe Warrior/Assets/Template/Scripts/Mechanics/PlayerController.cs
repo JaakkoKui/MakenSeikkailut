@@ -109,7 +109,7 @@ namespace Platformer.Mechanics
                 {
                     velocity.y = velocity.y * model.jumpDeceleration;
                 }
-            }
+            } 
 
             if (move.x > 0.01f)
                 spriteRenderer.flipX = false;
@@ -120,7 +120,7 @@ namespace Platformer.Mechanics
 //            animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             targetVelocity = move * maxSpeed;
-        }
+        } 
 
         public enum JumpState
         {

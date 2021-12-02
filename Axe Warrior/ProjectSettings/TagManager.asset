@@ -10,6 +10,7 @@ TagManager:
   - BambuSpikes
   - TutorialRequirement
   - LianaLadder
+  - Sign1
   layers:
   - Default
   - TransparentFX
