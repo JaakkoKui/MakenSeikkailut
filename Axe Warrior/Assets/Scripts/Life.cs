@@ -28,6 +28,7 @@ public class Life : MonoBehaviour
     AudioSource audioSource;
     private bool dscream = false;
     Animator anim;
+    CapsuleCollider2D playercoll;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class Life : MonoBehaviour
         PC = GetComponent<Platformer.Mechanics.PlayerController>();
         audioSource = GetComponent<AudioSource>();
         NewPlayer.SetActive(true);
+        playercoll = GetComponent<CapsuleCollider2D>();
     }
     void Update()
     {   
@@ -89,6 +91,7 @@ public class Life : MonoBehaviour
         audioSource.Play();
         Debug.Log("Wilhelm");
         dscream = true;
+        playercoll.size = new Vector2(playercoll.size.x, 0.01f);
         }
         timer += Time.deltaTime;
         if (timer > 5)
