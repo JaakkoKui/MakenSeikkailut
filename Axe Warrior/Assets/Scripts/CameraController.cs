@@ -4,20 +4,37 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
+  public GameObject player;
 
-    private Vector3 offset;
+  private Vector3 offset;
 
-    // Start is called before the first frame update
-    void Start()
+  private Vector3 deathOffset;
+
+  private Life life;
+
+
+  
+
+  // Start is called before the first frame update
+  void Start()
+  {
+    offset = transform.position - player.transform.position;
+    life = player.GetComponent<Life>();
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+
+    if (life.dscream == true)
     {
-        offset = transform.position - player.transform.position;
+        deathOffset = transform.position;
+        transform.position = deathOffset;
     }
-
-    // Update is called once per frame
-    void LateUpdate()
+    else
     {
-        transform.position = player.transform.position + offset;
+      transform.position = player.transform.position + offset;
     }
+  }
 }
 

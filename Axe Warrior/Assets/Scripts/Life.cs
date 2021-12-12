@@ -26,7 +26,7 @@ public class Life : MonoBehaviour
     Platformer.Mechanics.PlayerController PC;
     public SpriteRenderer spriteRenderer;
     AudioSource audioSource;
-    private bool dscream = false;
+    public bool dscream = false;
     Animator anim;
     CapsuleCollider2D playercoll;
     // Start is called before the first frame update
@@ -119,12 +119,21 @@ public class Life : MonoBehaviour
         
     }
     public void OnTriggerStay2D(Collider2D other){   //Checks if trigger collision stays
-            if (other.gameObject.CompareTag("Fire")){
+            
+        if (other.gameObject.CompareTag("Fire"))
+        {
             timer += Time.deltaTime;
-            if (timer > 3){
+            if (timer > 3)
+            {
                 HP -= 1;
                 Sethealthtext();
             }
-}
-}
+        }
+    }
+    
+    public void OnTriggerExit2D(Collider2D other){
+        if (other.gameObject.CompareTag("Fire")){
+            timer = 0;
+        }
+    }
 }
