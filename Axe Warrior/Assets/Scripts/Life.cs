@@ -15,9 +15,10 @@ public class Life : MonoBehaviour
     public GameObject deathText;
     public TextMeshProUGUI timetext;
     public TextMeshProUGUI matchestext;
+    public GameObject Wintext;
     public int HP = 1;
     public float time = 60;
-    private float timer = 0;
+    private float timer, timerW = 0;
     public int Matches = 1;
     bool MainMenu;
     float random;
@@ -29,12 +30,12 @@ public class Life : MonoBehaviour
     public bool dscream = false;
     Animator anim;
     CapsuleCollider2D playercoll;
-    // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         MainMenu = true;
         deathText.SetActive(false);
+        Wintext.SetActive(false);
         Sethealthtext();
         Setmatchestext();  
         PC = GetComponent<Platformer.Mechanics.PlayerController>();
@@ -54,12 +55,12 @@ public class Life : MonoBehaviour
             nextActionTime += period;
             FIRE.intensity = UnityEngine.Random.Range(0.4f,1f);
         }
-        if (time > 0 && HP > 0){  //Timer updater
+        if (time > 0 && HP > 0){
             time -= Time.deltaTime;
             Settimetext();
             SUN.intensity = time*0.02f;
         }
-        else{ //Displays youlosttext if HP or time runs out
+        else{
             youlost();
         }
 
@@ -69,6 +70,7 @@ public class Life : MonoBehaviour
         
         if(Input.GetKeyDown("e")){
             Debug.Log("Works");
+            MainMenu = false;
             MainMenu = true;
         }
     }
@@ -82,16 +84,29 @@ public class Life : MonoBehaviour
     void Setmatchestext(){ //Updates Matchestext
         matchestext.text = "Matches: " + Matches.ToString();
     }
+    void SetWintext(){ //Updates Matchestext
+        Wintext.SetActive(true);
+        timerW += Time.deltaTime;
+        PC.maxSpeed = 0;
+        PC.jumpTakeOffSpeed = 0;
+        time = 10000000000000;
+        if (timerW > 5)
+        {
+            MainMenu = true;
+            Debug.Log("Menu");
+        }
+    }
      void youlost(){ // Update is called once per frame
         deathText.SetActive(true);
         PC.maxSpeed = 0;
         PC.jumpTakeOffSpeed = 0;
         anim.SetBool("isDead", true);
-        if (!dscream){
-        audioSource.Play();
-        Debug.Log("Wilhelm");
-        dscream = true;
         playercoll.size = new Vector2(playercoll.size.x, 0.01f);
+        if (!dscream){
+            audioSource.Play();
+            Debug.Log("Wilhelm");
+            dscream = true;
+            
         }
         timer += Time.deltaTime;
         if (timer > 5)
@@ -110,11 +125,14 @@ public class Life : MonoBehaviour
             Matches += 1;
             other.gameObject.SetActive(false);
             Setmatchestext();
-            time += 10;
+            time += 5;
         }
         if (other.gameObject.CompareTag("BambuSpikes")){
             HP -= 1;
             Sethealthtext();
+        }
+        if (other.gameObject.CompareTag("Win")){
+            SetWintext();
         }
         
     }

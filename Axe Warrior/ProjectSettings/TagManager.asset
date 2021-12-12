@@ -11,6 +11,8 @@ TagManager:
   - TutorialRequirement
   - LianaLadder
   - Sign1
+  - Sign2
+  - Win
   layers:
   - Default
   - TransparentFX
